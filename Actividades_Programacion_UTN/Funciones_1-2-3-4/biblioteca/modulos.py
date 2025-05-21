@@ -16,16 +16,88 @@ def imprimir_float(decimal:float):
 def imprimir_lista(lista:list):
     print(lista)
 
-def imprimir_datos_brazil(posicion_brazil:list, nombre:list, mail:list, telefono:list,):
-   for i in range (len(posicion_brazil)):
-       print(f"Nombre: {nombre[posicion_brazil[i]]}, mail: {mail[posicion_brazil[i]]}, telefono: {telefono[posicion_brazil[i]]}")
+def imprimir_lista_elementos(lista:list):
+    for i in range(len(lista)):
+        print(f"{lista[i]}")
+
+def imprimir_datos_brazil(posicion_brazil:list, nombre:list, mail:list, telefono:list):
+    print("{:<17}{:<35}{:<18}".format("Nombre", "Mail", "Telefono"))
+    for i in range (len(posicion_brazil)):
+       print("{:<17}{:<35}{:<18}".format(nombre[posicion_brazil[i]], mail[posicion_brazil[i]], telefono[posicion_brazil[i]] ))
 
 def imprimir_datos_completos_personas_lista(lista:list, nombre:list, telefono:list, mail:list, address:list, postalZip:list, region:list, pais:list, edades:list ):
+    print("{:<17}{:<35}{:<18}{:<37}{:<13}{:<16}{:<15}{:<15}".format("Nombre", "Mail", "Telefono", "Addres", "PostalZip", "Region", "Pais", "Edades"))
     for i in range(len(lista)):
-        print(f"Nombre:{nombre[lista[i]]}, telefono: {telefono[lista[i]]}, mail: {mail[lista[i]]}, address: {address[lista[i]]}, postalZip: {postalZip[lista[i]]}, region: {region[lista[i]]}, pais: {pais[lista[i]]}, edad: {edades[lista[i]]}")
-
+        print("{:<17}{:<35}{:<18}{:<37}{:<13}{:<16}{:<15}{:<15}".format(nombre[lista[i]], mail[lista[i]], telefono[lista[i]], address[lista[i]], postalZip[lista[i]], region[lista[i]], pais[lista[i]], edades[lista[i]],))
 #   RETORNAR LISTA-----------------------------------------------------------------------------------------------------------
+def contar_lista_indices(lista1: list)->list:
+    lista_nueva = []
+    for i in range(len(lista1)):
+        lista_nueva.append(i)
+    print("contar listas indices: ", lista_nueva)
+    return lista_nueva
 
+def ordenar_ascendentemente_ocho_listas(lista:list,lista2:list, lista3:list, lista4:list, lista5:list, lista6:list, lista7:list, lista8: list):
+    for i in range(len(lista)- 1):
+        for j in range(i+1,len(lista)):
+            if lista[i] > lista[j]:
+                aux = lista[i]
+                lista[i] = lista[j]
+                lista[j] = aux
+                aux = lista2[i]
+                lista2[i] = lista2[j]
+                lista2[j] = aux
+                aux = lista3[i]
+                lista3[i] = lista3[j]
+                lista3[j] = aux
+                aux = lista4[i]
+                lista4[i] = lista4[j]
+                lista4[j] = aux
+                aux = lista5[i]
+                lista5[i] = lista5[j]
+                lista5[j] = aux
+                aux = lista6[i]
+                lista6[i] = lista6[j]
+                lista6[j] = aux
+                aux = lista7[i]
+                lista7[i] = lista7[j]
+                lista7[j] = aux
+                aux = lista8[i]
+                lista8[i] = lista8[j]
+                lista8[j] = aux
+def ordenar_descendentemente_decendentemente_ocho_listas(lista:list,lista2:list, lista3:list, lista4:list, lista5:list, lista6:list, lista7:list, lista8: list):
+    for i in range(len(lista)- 1):
+        for j in range(i+1,len(lista)):
+            if lista[i] < lista[j]:
+                aux = lista[i]
+                lista[i] = lista[j]
+                lista[j] = aux
+                aux = lista2[i]
+                lista2[i] = lista2[j]
+                lista2[j] = aux
+                aux = lista3[i]
+                lista3[i] = lista3[j]
+                lista3[j] = aux
+                aux = lista4[i]
+                lista4[i] = lista4[j]
+                lista4[j] = aux
+                aux = lista5[i]
+                lista5[i] = lista5[j]
+                lista5[j] = aux
+                aux = lista6[i]
+                lista6[i] = lista6[j]
+                lista6[j] = aux
+                aux = lista7[i]
+                lista7[i] = lista7[j]
+                lista7[j] = aux
+                aux = lista8[i]
+                lista8[i] = lista8[j]
+                lista8[j] = aux
+            elif lista[i] == lista[j]:
+                if lista2[i] < lista2[j]:
+                    aux = lista2[i]
+                    lista2[i] = lista2[j]
+                    lista2[j] = aux
 
 def guardar_posiciones_en_lista_con_elementos_iguales(ubicacion:int, lista:list)->list:
     posiciones = []                                                                   

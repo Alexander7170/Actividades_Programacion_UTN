@@ -15,7 +15,7 @@ def mostrar_lista(lista:list):
     print(lista)
 
 variable_lista_1 = [0] * 10
-mostrar_lista((pedir_elementos("Diga 10 nombres: ",5)))
+#mostrar_lista((pedir_elementos("Diga 10 nombres: ",10)))
 
 #   EJERCICIO 2
 """
@@ -32,7 +32,7 @@ def cambiar_posicion_numero()->list:
     lista[posicion] = numero
     return lista
 
-mostrar_lista((cambiar_posicion_numero()))
+#mostrar_lista((cambiar_posicion_numero()))
 
 
 #EJERCICIO 3
@@ -45,7 +45,7 @@ def verificar_lista(desde,hasta)->list:
             numero = int(input("No pusiste un numero dentro de los parametros, di de nuevo: "))
         lista[i] = numero
     return lista
-mostrar_lista((verificar_lista(2,20)))
+#mostrar_lista((verificar_lista(2,20)))
 
 
 #   EJERCICIO 4
@@ -59,7 +59,7 @@ def buscar_numero_lista(numero:int, lista:list)->bool:
             break
     return flag
 
-mostrar_lista((buscar_numero_lista(3,[8,6,5,2,3]))) #ejemplo
+#mostrar_lista((buscar_numero_lista(3,[8,6,5,2,3]))) #ejemplo
 
 
 #   EJERCICIO 5
@@ -100,13 +100,13 @@ def imprimir_nombres(edades_lista_actualizada:list, nombres_lista:list, edades_l
         # hice lo mismo con edades
         print(nombres_lista[edades_lista_actualizada[i]], "con", edades_lista[edades_lista_actualizada[i]], "años")
 
-imprimir_nombres(retornar_lista_posiciones_misma_minima_edad(retornar_posicion_menor_edad(Edades),Edades),Nombres, Edades)
+#imprimir_nombres(retornar_lista_posiciones_misma_minima_edad(retornar_posicion_menor_edad(Edades),Edades),Nombres, Edades)
 
 #   Ejercicio 6
 
 from biblioteca import listas_personas 
 nombres_lista_personas_6 = listas_personas.nombres
-mostrar_lista(nombres_lista_personas_6)
+#mostrar_lista(nombres_lista_personas_6)
 
 # #   EJERCICIO 7
 from biblioteca import modulos
@@ -120,12 +120,14 @@ def mostrar_menu_de_opciones():
     print("{:<2} {:<20}".format("6 ----->", "De los usuarios de Brasil, listar los datos del usuario de mayor edad"))
     print("{:<2} {:<20}".format("7 ----->", "Listar los datos de los usuarios de México y Brasil cuyo código postal sea mayor a 8000"))
     print("{:<2} {:<20}".format("8 ----->", "Listar nombre, mail y teléfono de los usuarios italianos mayores a 40 años."))
-
+    print("{:<2} {:<20}".format("9 ----->", "Listar los datos de los usuarios de México ordenados por nombre."))
+    print("{:<2} {:<20}".format("10 ---->", "Listar los datos del/los usuario/s más joven/es ordenados por edad de manera ascendente."))
+    print("{:<2} {:<20}".format("11 ---->", "Listar los datos de los usuarios de México y Brasil cuyo código postal sea mayor a 8000 ordenado por nombre y edad de manera descendente"))
 Lista_importada = False
 fin_del_programa = False
 while fin_del_programa == False:
     mostrar_menu_de_opciones()
-    match modulos.pedir_entero_con_parametros("dime el numero donde desea ingresar: ",1,8): 
+    match modulos.pedir_entero_con_parametros("dime el numero donde desea ingresar: ",1,11): 
         case 1:
             from biblioteca import listas_personas
             Lista_importada = modulos.importar_lista_true()
@@ -133,7 +135,7 @@ while fin_del_programa == False:
             
         case 2:
             if Lista_importada == True:
-                modulos.imprimir_datos_completos_personas_lista(modulos.buscar_string_en_lista("Mexico",listas_personas.country), listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.edades, listas_personas.country)
+                modulos.imprimir_datos_completos_personas_lista(modulos.buscar_string_en_lista("Mexico",listas_personas.country), listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.country, listas_personas.edades)
                 fin_del_programa = True
         case 3:
             if Lista_importada == True:
@@ -149,15 +151,30 @@ while fin_del_programa == False:
                 fin_del_programa = True
         case 6:
             if Lista_importada == True:
-                modulos.imprimir_datos_completos_personas_lista(modulos.buscar_en_determinadas_posiciones_mismo_numero(modulos.buscar_en_determinados_posiciones_mayor_entero(modulos.buscar_string_en_lista("Brazil",listas_personas.country),listas_personas.edades),modulos.buscar_string_en_lista("Brazil",listas_personas.country),listas_personas.edades),listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.edades, listas_personas.country)
+                modulos.imprimir_datos_completos_personas_lista(modulos.buscar_en_determinadas_posiciones_mismo_numero(modulos.buscar_en_determinados_posiciones_mayor_entero(modulos.buscar_string_en_lista("Brazil",listas_personas.country),listas_personas.edades),modulos.buscar_string_en_lista("Brazil",listas_personas.country),listas_personas.edades),listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.country, listas_personas.edades)
                 fin_del_programa = True
         case 7:
             if Lista_importada == True:
-                modulos.imprimir_datos_completos_personas_lista(modulos.interseccion_posiciones_en_listas(modulos.buscar_elementos_mayores_a_entero(8000,listas_personas.postalZip), (modulos.unir_posiciones(modulos.buscar_string_en_lista("Brazil",listas_personas.country),modulos.buscar_string_en_lista("Mexico",listas_personas.country)))), listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.edades, listas_personas.country)
+                modulos.imprimir_datos_completos_personas_lista(modulos.interseccion_posiciones_en_listas(modulos.buscar_elementos_mayores_a_entero(8000,listas_personas.postalZip), (modulos.unir_posiciones(modulos.buscar_string_en_lista("Brazil",listas_personas.country),modulos.buscar_string_en_lista("Mexico",listas_personas.country)))), listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.country, listas_personas.edades)
                 fin_del_programa = True
         case 8:
             if Lista_importada == True:
                 modulos.imprimir_datos_brazil(modulos.interseccion_posiciones_en_listas(modulos.buscar_string_en_lista("Italy",listas_personas.country), modulos.buscar_elementos_mayores_a_entero(40,listas_personas.edades)),listas_personas.nombres, listas_personas.mails, listas_personas.telefonos )
+                fin_del_programa = True
+        case 9:
+            if Lista_importada == True:
+                modulos.ordenar_ascendentemente_ocho_listas(listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.country, listas_personas.edades)
+                modulos.imprimir_datos_completos_personas_lista(modulos.buscar_string_en_lista("Mexico",listas_personas.country), listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.country, listas_personas.edades)
+                fin_del_programa = True
+        case 10:
+            if Lista_importada == True:
+                modulos.ordenar_ascendentemente_ocho_listas(listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.country, listas_personas.edades)
+                modulos.imprimir_datos_completos_personas_lista(modulos.guardar_posiciones_en_lista_con_elementos_iguales(modulos.buscar_la_posicion_menor_entero(listas_personas.edades), listas_personas.edades), listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.country, listas_personas.edades)
+                fin_del_programa = True
+        case 11:
+            if Lista_importada == True:
+                modulos.ordenar_descendentemente_decendentemente_ocho_listas(listas_personas.nombres, listas_personas.edades, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.country)
+                modulos.imprimir_datos_completos_personas_lista(modulos.interseccion_posiciones_en_listas(modulos.buscar_elementos_mayores_a_entero(8000,listas_personas.postalZip), (modulos.unir_posiciones(modulos.buscar_string_en_lista("Brazil",listas_personas.country),modulos.buscar_string_en_lista("Mexico",listas_personas.country)))), listas_personas.nombres, listas_personas.telefonos, listas_personas.mails, listas_personas.address, listas_personas.postalZip, listas_personas.region, listas_personas.country, listas_personas.edades)
                 fin_del_programa = True
     if Lista_importada == False:
         modulos.imprimir_mensaje("Lista no importada")
