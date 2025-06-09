@@ -1,6 +1,5 @@
 
 def importar_lista_true()->bool:
-    from biblioteca import listas_personas
     return True
 
 #   IMPRIMIR-------------------------------------------------------------------------------------------------------------
@@ -184,7 +183,7 @@ def buscar_elementos_mayores_a_entero(numero:int, lista:list)->list:
 #   RETORNAR STRING-------------------------------------------------------------------------------------------------------
 def pedir_string(mensaje:str)->str:
     cadena_caracteres = input(mensaje)
-    return mensaje
+    return cadena_caracteres
 
 #   RETORNAR INTEGER------------------------------------------------------------------------------------------------------
 

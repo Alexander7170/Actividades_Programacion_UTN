@@ -7,22 +7,21 @@ Si lo encuentra, la función debe retornar ese número.
 Si no existe, debe retornar None.
 # MATRIZ FIJA
 matriz = [
-    [5, 2, 3, 4],
+    [5, 0, 3, 4],
     [5, 2, 7, 8],
     [2, 2, 3, 1],
     [1, 6, 7, 4]
 ]
 """
-matriz = [[5, 2, 3, 4],
-          [5, 2, 7, 8],
-          [2, 2, 3, 1],
+matriz = [[5, 0, 3, 0],
+          [5, 2, 7, 4],
+          [2, 2, 3, 4],
           [1, 6, 7, 4]]
 
 def recorrer(matrix:list)->int:
-    contador = 0
-    for i in range(len(matrix)):
-        for j in range(len(matrix)):
-            numero = matrix[j][i]
-            if numero == matrix[j][j] == matrix[j][2]:
+    for i in range(3):
+        for j in range(3):
+            numero = matrix[i][j]
+            if numero == matrix[1][i] and numero == matrix[2][i]:
                 print(numero)
 recorrer(matriz)
