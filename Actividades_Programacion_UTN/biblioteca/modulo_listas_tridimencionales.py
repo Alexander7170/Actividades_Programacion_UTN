@@ -388,19 +388,5 @@ def cambiar_indice_de_una_lista_de_indices(lista_de_indices:list, indice_en_list
 def sumar_elementos_usando_indices_tridimencional(lista_tridimencional:list, lista_indices_1:list, lista_indices_2:list)->int:
     suma = lista_tridimencional[lista_indices_1[0]][lista_indices_1[1]][lista_indices_1[2]] + lista_tridimencional[lista_indices_2[0]][lista_indices_2[1]][lista_indices_2[2]]
     return suma
-def sumar_numeros(numero_1:int, numero_2:int)->int:
-    return numero_1 + numero_2
-def restar_numeros(numero_1:int, numero_2_negativo:int)->int:
-    return numero_1 - numero_2_negativo
-def verificar_entero_por_un_minimo(minimo:int,numero:int)->bool:
-    numero_mayor_al_minimo = True
-    if numero < minimo:
-        numero_mayor_al_minimo = False
-    return numero_mayor_al_minimo
-def pedir_entero_mayor_al_minimo(mensaje:str,minimo:int)->int:
-    numero = int(input(mensaje))
-    if numero < minimo:
-        numero = int(input(minimo))
-    return numero
 
     

@@ -233,6 +233,16 @@ de una cadena.
 """
 def contar_subcadenas_en_cadenas(cadena_de_texto:str, sub_cadena:str)->int:
     """
+    Funcion que cuenta las veces se presencio una sub cadena en la cadena de texto
+
+    Parametros:
+    
+    cadena_de_texto: la cadena de texto en donde contaremos cada vez que aparesca la sub cadena en ella
+
+    sub_cadena: un string, es contaremos si aparece en la contadena de texto
+
+    Retorno:
+        devuelve un entero, la cantidad de veces que se encontro la sub cadena en la cadena de texto
     """
     contador = 0
     print(len(cadena_de_texto))
@@ -245,24 +255,3 @@ def contar_subcadenas_en_cadenas(cadena_de_texto:str, sub_cadena:str)->int:
             else:
                 break
     return contador
-
-print(contar_subcadenas_en_cadenas("alexa","alexa"))
-
-def contar_subcadenas_en_cadenas_v1(cadena_de_texto:str, sub_cadena:str)->int:
-    contador = 0
-    len_sub = len(sub_cadena) #3
-    len_texto = len(cadena_de_texto)#5
-
-    for i in range(len_texto - len_sub + 1):#3
-        es_igual = True
-        for j in range(len_sub): #3
-            if cadena_de_texto[i + j] != sub_cadena[j]:
-                es_igual = False
-                break
-        if es_igual:
-            contador += 1
-
-    return contador
-
- 
-            

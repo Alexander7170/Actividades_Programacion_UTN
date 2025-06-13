@@ -18,10 +18,17 @@ matriz = [[5, 0, 3, 0],
           [2, 2, 3, 4],
           [1, 6, 7, 4]]
 
-def recorrer(matrix:list)->int:
+def buscar_numero(matrix:list, fila:int, columna:int)->int:
+    numero = matrix[fila][columna]
+    return numero
+def lista_misma_columna(matrix:list, columna:list)->list:
+    lista = []
     for i in range(3):
         for j in range(3):
-            numero = matrix[i][j]
-            if numero == matrix[1][i] and numero == matrix[2][i]:
-                print(numero)
+            elemento = matrix[i][columna]
+            lista.append(elemento)
+def verificar_igual_elemento(numero:int, lista_elementos:list):
+    contador = 0
+        for numero in lista_elementos:
+        
 recorrer(matriz)
