@@ -3,17 +3,7 @@ def importar_lista_true()->bool:
     return True
 
 #   IMPRIMIR-------------------------------------------------------------------------------------------------------------
-def imprimir_numero(entero:int):
-    print(entero)
 
-def imprimir_mensaje(mensaje:str):
-    print(mensaje)
-
-def imprimir_float(decimal:float):
-    print(decimal)
-
-def imprimir_lista(lista:list):
-    print(lista)
 
 def imprimir_lista_elementos(lista:list):
     for i in range(len(lista)):

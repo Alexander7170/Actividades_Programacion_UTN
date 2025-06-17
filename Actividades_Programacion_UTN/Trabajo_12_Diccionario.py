@@ -1,5 +1,5 @@
 from biblioteca.estudiantes import *
-from biblioteca.modulo_v3 import *
+from biblioteca.modulo_listas_dic import *
 from biblioteca.modulo import pedir_entero_con_parametros 
 from biblioteca.modulo_listas_bidimencionales import buscar_promedios_en_listas_anidadas
 from biblioteca.modulo_listas import buscar_promedio, buscar_la_posicion_del_mayor_entero, buscar_el_elemento_del_menor_entero
