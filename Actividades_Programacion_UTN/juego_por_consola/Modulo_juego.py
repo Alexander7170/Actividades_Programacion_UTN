@@ -1,20 +1,3 @@
-
-def transformar_tablero (tablero:list, indice_original:int):
-    """
-    Funcion que cambia los elementos, menores al indice del usuario, en negativos
-    
-    Parametros:
-
-    tablero: la lista que modificaremos directamente algunos elementos
-
-    indice_original: un entero que indica el limite, donde los indices menores a esos elemetos, se tranformaran en negativos
-    """
-    for i in range(len(tablero)):
-        if i < indice_original and tablero[i] != 0:
-            tablero[i] = tablero[i] * -1
-        elif i == indice_original:
-            break
-        
 def imprimir_tablero(tablero:list):
     """
     Funcion que imprime en la primera linea: todos el indice del tablero
@@ -24,13 +7,20 @@ def imprimir_tablero(tablero:list):
     
     tablero: una lista donde imprimiremos todos sus indice y valores
     """
-    todos_los_casilleros = ""
+    indices_casilleros = ""
     valores_casilleros = ""
     for i in range(len(tablero)):
+        indices_casilleros += str(i) + " " * len(str(tablero[i])) + "|"
         valores_casilleros += str(tablero[i]) + " " * len(str(i)) + "|"
-        todos_los_casilleros += str(i) + " " * len(str(tablero[i])) + "|"
     print("Valores:    ", valores_casilleros)
-    print("Casilleros: ", todos_los_casilleros)
+    print("Casilleros: ", indices_casilleros)
+
+def actualizar_tablero_segun_indice(tablero:list, indice_usuario:int):
+    for i in range(len(tablero)):
+        if (i < indice_usuario) and (tablero[i] > 0):
+            tablero[i] = tablero[i] * -1
+        elif (i > indice_usuario) and (tablero[i] < 0):
+            tablero[i] = tablero[i] * -1
 
 def verificar_perdedor(indice_usuario:int)->bool:
     """
@@ -138,7 +128,7 @@ def verificar_lista_vacia(lista:list)->bool:
         vacia = True
     return vacia
 
-def imprimir_pregunta_opciones(diccionario:dict, clave_respuesta: str):
+def imprimir_valores_con_excepcioon(diccionario:dict, clave_excepcion: str):
     """
     Funcion que imprime en un orden secuencial, los elementos de una lista local
     seguido de los valores de las claves del diccionario, excepto una clave
@@ -153,7 +143,7 @@ def imprimir_pregunta_opciones(diccionario:dict, clave_respuesta: str):
     lista_opciones = ["Pregunta","a","b","c","d","e"]
     contador = 0
     for clave in diccionario:
-         if clave != clave_respuesta:
+         if clave != clave_excepcion:
             print(lista_opciones[contador]," : ", diccionario[clave])
             contador += 1
 
@@ -205,10 +195,10 @@ def eliminar_un_dict(lista:list, diccionario_eliminar:dict):
     """
     lista.remove(diccionario_eliminar)
 
-def verificar_indice_vacio_en_un_movimiento(tablero:list, indice_usuario:int, movimiento:int)->bool:
+def verificar_casillero_vacio(tablero:list, indice_casillero:int)->bool:
     """
     Funcion que comprueba si donde esta el indice del usuario, 
-    en ciertos movimientos,si el casillero donde caeria esta vacio, osea un 0
+    en ciertos avances,si el casillero donde caeria esta vacio, osea un 0
 
     Parametros:
 
@@ -223,11 +213,11 @@ def verificar_indice_vacio_en_un_movimiento(tablero:list, indice_usuario:int, mo
         indice es igual a 0, sino devuelve falso
         """
     casillero_vacio = False
-    if tablero[indice_usuario + movimiento] == 0:
+    if tablero[indice_casillero] == 0:
         casillero_vacio = True
     return casillero_vacio
 
-def numero_movimientos_extras(tablero_lista:list, indice:int)->int:
+def cant_movimiento_adicionales(tablero_lista:list, indice_us:int)->int:
         """Una funcion recursiva que calcula cuantos casilleros mas tiene que avazar o retroces, en caso de que 
         el jugador cae en ese indice Osea si cayo en una serpiente o escalera, y en consecuencia, 
         cae en otra serpiente o escalera
@@ -242,14 +232,12 @@ def numero_movimientos_extras(tablero_lista:list, indice:int)->int:
         Retorno:
             Devuelve un numero entero, indicando cunatos casilleros mas tiene que avanzar o retrocer"""
 
-        if tablero_lista[indice] == 0 :
+        if tablero_lista[indice_us] == 0 :
             return 0
         else:
-            aux = tablero_lista[indice]
-            tablero_lista[indice] = 0 # SI QUIERO ELIMINAR O NO LA SERPIENTE O ESCALERA, EVITANDO ASI BUCLES
-            return aux + numero_movimientos_extras(tablero_lista, aux + indice)
+            return tablero_lista[indice_us] + cant_movimiento_adicionales(tablero_lista , indice_us + tablero_lista[indice_us])
 
-def intercambiar_valor_en_un_movimiento(tablero:list, indice_usuario:int, movimiento:int):
+def intercambiar_i_usuario(tablero:list, indice_usuario:int, indice_nuevo_usuario:int):
     """
     Funcion que intercambia el valor dentro del indice_usuario: y el valor dentro del indice usuario mas
     el parametro movimiento:
@@ -264,10 +252,17 @@ def intercambiar_valor_en_un_movimiento(tablero:list, indice_usuario:int, movimi
 
     """
     aux = tablero[indice_usuario]
-    tablero[indice_usuario] = tablero[indice_usuario + movimiento]
-    tablero[indice_usuario + movimiento] = aux
+    tablero[indice_usuario] = tablero[indice_nuevo_usuario]
+    tablero[indice_nuevo_usuario] = aux
 
 def guardar_score(indice_usuario:int, nombre_usuario:str):
-    with open("score.csv","w+") as archivo:
+    import os
+    os.remove("score.csv")
+    if os.path.exists("score.csv"):
+        archivo = open("score.csv","a")
+        archivo.write(f"{nombre_usuario},{indice_usuario} \n ")
+    else:
+        archivo = open("score.csv","w")
         archivo.write("Nombre,Puntaje \n")
-        archivo.write(f"{nombre_usuario},{indice_usuario}")
+        archivo.write(f"{nombre_usuario},{indice_usuario} \n")
+    archivo.close()

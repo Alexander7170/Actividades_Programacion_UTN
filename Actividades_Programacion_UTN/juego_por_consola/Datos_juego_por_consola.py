@@ -1,7 +1,7 @@
 PUNTO_DE_PARTIDA = 15
 MOVERSE_RESPUESTA_CORRECTA = 1
 MOVERSE_RESPUESTA_INCORRECTA = - 1
-tablero = [0,1,0,0,0,3,0,0,2,0,0,1,0,0,2,0,1,0,1,0,1,1,1,1,0,0,0,1,0,1,0]
+tablero = [0,1,0,0,2,0,1,0,0,0,2,0,0,2,1,0,1,0,1,0,1,2,1,0,0,3,0,1,0,1,0]
 preguntas = [
     {
         "pregunta": "¿Cuál es el país más grande del mundo por superficie?",
