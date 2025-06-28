@@ -44,6 +44,6 @@ while seguir_jugando:
 
     if seguir_jugando == False:
         anexar_score(nombre_usuario, indice_usuario)
-
+        print(MENSAJE_INFORMAR_CASILLERO, (indice_usuario))
 
 print("fin del programa")

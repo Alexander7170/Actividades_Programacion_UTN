@@ -32,6 +32,7 @@ capsula_roja = pygame.image.load("Imagenes/figura_capsula_amarilla.png")
 capsula_azul = pygame.image.load("Imagenes/figura_capsula_azul.png")
 capsula_verde = pygame.image.load("Imagenes/figura_capsula_verde.png")
 fondo_inicio_pantalla = pygame.image.load("Imagenes/fondo_inicio_pantalla.png")
+capsula_roja_miniatura = pygame.transform.scale(capsula_roja,(70,70))
 
 
 fuente_subtitulos = pygame.font.SysFont("Comic Sans MS",50)
@@ -48,6 +49,9 @@ texto_titulo_c = fuente_titulo.render("Serpientes",True, COLOR_NEGRO)
 texto_pedir_nombre = fuente_subtitulos.render(MENSAJE_PEDIR_NOMBRE,True,COLOR_NEGRO)
 rect_capsula_verde = capsula_verde.get_rect()
 
+
+rect_capsula_roja_miniatura = capsula_amarilla.get_rect()
+
 rect_capsula_amarilla = capsula_amarilla.get_rect() # # DEVUELVE UNA SUPERFICIE INVICIBLE, UNA ZONA CON UN ALTO Y ANCHO DE LA IMAGEN
 rect_capsula_roja = capsula_roja.get_rect() # DEVUELVE UNA SUPERFICIE INVICIBLE, UNA ZONA CON UN ALTO Y ANCHO DE LA IMAGEN
 rect_capsula_azul = capsula_azul.get_rect() # DEVUELVE UNA SUPERFICIE INVICIBLE, UNA ZONA CON UN ALTO Y ANCHO DE LA IMAGEN
@@ -57,7 +61,6 @@ rect_capsula_amarilla.x = 250 # CAMBIO SU EJE X
 rect_capsula_amarilla.y = 420 # UBICO ESA ZONA INVICIBLE EN LA COORDENADA Y
 rect_capsula_roja.x = 250 # CAMBIO SU EJE X
 rect_capsula_roja.y = 520 # UBICO ESA ZONA INVICIBLE EN LA COORDENADA Y
-py
 
 pygame.display.set_caption("Trivia")
 correr_juego = True
@@ -77,6 +80,7 @@ while correr_juego:
                             if event.type == pygame.QUIT:
                                 jugar = False
                                 escribiendo = False
+                                correr_juego = False
                             elif event.type == pygame.KEYDOWN:
                                 if event.key == pygame.K_RETURN:
                                     escribiendo = False
@@ -87,7 +91,13 @@ while correr_juego:
                                     nombre = nombre[0:-1]
                                 elif len(nombre) <= 13:
                                     nombre += event.unicode
+                            elif event.type == pygame.MOUSEBUTTONDOWN:
+                                click = event.pos
+                                if rect_capsula_roja_miniatura.collidepoint(click):
+                                    escribiendo = False
+                                    jugar = False
                             pantalla.blit(fondo_inicio_pantalla,(0,0))
+                            pantalla.blit(capsula_roja_miniatura,(10,10))
                             pygame.draw.line(pantalla,COLOR_NEGRO,(200,250),(600,250),5)
                             pygame.draw.rect(pantalla,COLOR_GRIS,(190,40,460,100),5)
                             texto_nombre = fuente_subtitulos.render(nombre,True,(0,0,0))

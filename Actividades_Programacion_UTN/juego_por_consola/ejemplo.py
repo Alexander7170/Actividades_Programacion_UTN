@@ -1,42 +1,42 @@
 import pygame
+import math
+
+# Inicializar Pygame
 pygame.init()
 
-# Configuración
-ANCHO = 700
-ALTO = 500
-pantalla = pygame.display.set_mode((ANCHO, ALTO))
-pygame.display.set_caption("Escribí tu nombre")
+# Crear ventana
+width, height = 800, 600
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Colisión con círculo")
 
-# Fuente para mostrar texto
-fuente = pygame.font.SysFont("arial", 32)
+# Definir el círculo
+circle_center = (400, 300)  # centro del círculo
+circle_radius = 100
+circle_color = (0, 255, 0)  # verde
 
-# Colores
-BLANCO = (255, 255, 255)
-NEGRO = (0, 0, 0)
+# Loop principal
+running = True
+while running:
+    screen.fill((0, 0, 0))  # fondo negro
 
-# Variables
-escribiendo = True
-nombre = ""
+    # Dibujar el círculo
+    pygame.draw.circle(screen, circle_color, circle_center, circle_radius)
 
-while escribiendo:
-    for evento in pygame.event.get():
-        if evento.type == pygame.QUIT:
-            escribiendo = False
-        elif evento.type == pygame.KEYDOWN:
-            if evento.key == pygame.K_RETURN:
-                print(f"Nombre ingresado: {nombre}")
-                escribiendo = False
-            elif evento.key == pygame.K_BACKSPACE:
-                nombre = nombre[:-1]
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+        # Detectar clic del mouse
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = event.pos
+            dx = mouse_pos[0] - circle_center[0]
+            dy = mouse_pos[1] - circle_center[1]
+            distance = math.sqrt(dx ** 2 + dy ** 2)
+
+            if distance <= circle_radius:
+                print("¡Colisión con el círculo!")
             else:
-                nombre += evento.unicode
-
-    # Dibujar en pantalla
-    pantalla.fill(BLANCO)
-    texto_superior = fuente.render("Decime tu nombre:", True, NEGRO)
-    texto_nombre = fuente.render(nombre, True, NEGRO)
-    pantalla.blit(texto_superior, (50, 100))
-    pantalla.blit(texto_nombre, (50, 150))
+                print("No hubo colisión")
 
     pygame.display.flip()
 
