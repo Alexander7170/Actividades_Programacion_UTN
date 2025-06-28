@@ -1,7 +1,16 @@
 PUNTO_DE_PARTIDA = 15
 MOVERSE_RESPUESTA_CORRECTA = 1
-MOVERSE_RESPUESTA_INCORRECTA = - 1
-tablero = [0,1,0,0,2,0,1,0,0,0,2,0,0,2,1,0,1,0,1,0,1,2,1,0,0,3,0,1,0,1,0]
+MOVERSE_RESPUESTA_INCORRECTA = 1
+CLAVE_RESPUESTA_CORRECTA = "respuesta_correcta"
+ENCABEZADO_PREGUNTA = ["Pregunta", "Opcion A: ", "Opcion B: ", "Opcion C: ",]
+MENSAJE_PEDIR_NOMBRE = "Cual es tu nombre? "
+MENSAJE_CORRECTO = "Correcto"
+MENSAJE_INCORRECTO = "Incorrecto"
+MENSAJE_PEDIR_OPCION = "Que opcion eliges? "
+MENSAJE_INFORMAR_CASILLERO = "Quedaste en el casillero: "
+
+
+TABLERO =  [0,1,0,0,0,3,0,0,0,0,0,1,0,0,2,0,1,0,0,0,1,0,0,2,0,0,0,1,1,1,0]
 preguntas = [
     {
         "pregunta": "¿Cuál es el país más grande del mundo por superficie?",

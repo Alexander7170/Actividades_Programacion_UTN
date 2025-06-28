@@ -1,26 +1,4 @@
-def imprimir_tablero(tablero:list):
-    """
-    Funcion que imprime en la primera linea: todos el indice del tablero
-    en la segunda linea imprime los valores de cada indice
 
-    Parametros:
-    
-    tablero: una lista donde imprimiremos todos sus indice y valores
-    """
-    indices_casilleros = ""
-    valores_casilleros = ""
-    for i in range(len(tablero)):
-        indices_casilleros += str(i) + " " * len(str(tablero[i])) + "|"
-        valores_casilleros += str(tablero[i]) + " " * len(str(i)) + "|"
-    print("Valores:    ", valores_casilleros)
-    print("Casilleros: ", indices_casilleros)
-
-def actualizar_tablero_segun_indice(tablero:list, indice_usuario:int):
-    for i in range(len(tablero)):
-        if (i < indice_usuario) and (tablero[i] > 0):
-            tablero[i] = tablero[i] * -1
-        elif (i > indice_usuario) and (tablero[i] < 0):
-            tablero[i] = tablero[i] * -1
 
 def verificar_perdedor(indice_usuario:int)->bool:
     """
@@ -56,7 +34,7 @@ def verificar_ganador(tablero:list, indice_usuario:int)->bool:
         gano = True
     return gano
     
-def pedir_string(mensaje:str)->str:
+def pedir_dato(mensaje:str)->str:
     return input(mensaje)
 
 def validar_string(string:str,opcion1:str, opcion2:str)->str:
@@ -79,38 +57,24 @@ def validar_string(string:str,opcion1:str, opcion2:str)->str:
         string = input("ponga dentro de las opciones " + opcion1 + "/" + opcion2 + "  :  ").lower()
     return string
 
-def ubicar_usuario(lista:list, indice:int, usuario:str):
+def verificar_palabra(palabra:str, palabra_a_comparar:str)->bool:
     """
-    Funcion que reemplaza el valor en ese indice por el usuario
+    Funcion que verifica si la primera palabra es igual a la segunda palabra pasado como paremetro
 
     Parametros:
 
-    lista: la lista donde usaremos un indice para reemplazar su valor de ese indice por usuario
+    palabra: un string que la que compararemos con la otra palabra
 
-    indice: un netero que significara el indice donde estara el usuario
-
-    usuario: un string que sera el valor que estara en ese indice de la lista
-    """
-    lista[indice] = usuario
-
-def buscar_usuario(lista:list, usuario:str)->int:
-    """
-    Funcion que busca al usuario en la lista
-
-    Parametros:
-
-    lista: una lista donde buscaremos en ella el usuario
-
-    usuario: el valor tipo string que se buscara en la lista
+    palabra_a_comparar: un string que se usara como la comparacion de la otra palabra
 
     Retorno:
-        Devuelve un entero que indica la posicion donde se encuentra el usuario:
-
+        Devuelve un booleano verdadero si ambas palabras son iguales, sino devuelve falso 
     """
-    for i in range(len(lista)):
-        if lista[i] == usuario:
-            return i
-        
+    palabras_iguales = False
+    if palabra == palabra_a_comparar:
+        palabras_iguales = True
+    return palabras_iguales
+
 def verificar_lista_vacia(lista:list)->bool:
     """
     Funcion que comprueba si la lista tiene  o no elementos
@@ -128,10 +92,11 @@ def verificar_lista_vacia(lista:list)->bool:
         vacia = True
     return vacia
 
-def imprimir_valores_con_excepcioon(diccionario:dict, clave_excepcion: str):
+def imprimir_valores(diccionario:dict, encabezado_de_diccionario:list, clave_excepcion: str):
     """
-    Funcion que imprime en un orden secuencial, los elementos de una lista local
-    seguido de los valores de las claves del diccionario, excepto una clave
+    Funcion que imprime todos los valores del diccionario, excepto el valor que este dentro de una clave. 
+    En paralelo, imprime por cada valor del diccionario, un valor de la lista de encabezados, osea el encabezado
+    de cada valor
 
     Parametros:
     
@@ -140,12 +105,11 @@ def imprimir_valores_con_excepcioon(diccionario:dict, clave_excepcion: str):
     clave_respuesta: un string que indica que indica que valor no se imprimira
 
     """
-    lista_opciones = ["Pregunta","a","b","c","d","e"]
-    contador = 0
+    indice = 0
     for clave in diccionario:
-         if clave != clave_excepcion:
-            print(lista_opciones[contador]," : ", diccionario[clave])
-            contador += 1
+        if clave != clave_excepcion:
+            print(encabezado_de_diccionario[indice]," : ", diccionario[clave])
+            indice += 1
 
 def verificar_respuesta(pregunta:dict, respuesta:str, clave_respuesta:str)->bool:
     """
@@ -167,7 +131,7 @@ def verificar_respuesta(pregunta:dict, respuesta:str, clave_respuesta:str)->bool
         acerto = True
     return acerto
 
-def buscar_dic_random(lista:list)->dict:
+def buscar_valor(lista:list)->dict:
     """
     Funcion que busca aleatoriamente un diccionario dentro de la lista:
 
@@ -182,7 +146,7 @@ def buscar_dic_random(lista:list)->dict:
     pregunta = random.choice(lista)
     return pregunta
 
-def eliminar_un_dict(lista:list, diccionario_eliminar:dict):
+def eliminar_un_valor(lista:list, valor_a_eliminar:dict):
     """
     Funcion que elimina un diccionario dentro de la lista de diccionarios
 
@@ -193,7 +157,7 @@ def eliminar_un_dict(lista:list, diccionario_eliminar:dict):
     diccionario_eliminar: un diccionario el cual existe en la lista y es el que vamos a eliminar:
 
     """
-    lista.remove(diccionario_eliminar)
+    lista.remove(valor_a_eliminar)
 
 def verificar_casillero_vacio(tablero:list, indice_casillero:int)->bool:
     """
@@ -217,52 +181,114 @@ def verificar_casillero_vacio(tablero:list, indice_casillero:int)->bool:
         casillero_vacio = True
     return casillero_vacio
 
-def cant_movimiento_adicionales(tablero_lista:list, indice_us:int)->int:
-        """Una funcion recursiva que calcula cuantos casilleros mas tiene que avazar o retroces, en caso de que 
-        el jugador cae en ese indice Osea si cayo en una serpiente o escalera, y en consecuencia, 
-        cae en otra serpiente o escalera
-        
-        Parametros:
-        
-        tablero_lista: Una lista que contiene numeros enteros, y es donde sumo los movimientos concecuentes que tuvo el usuario al caer
-        en ese indice 
-        
-        indice: un entero que representa donde estaria el usuario 
-        
-        Retorno:
-            Devuelve un numero entero, indicando cunatos casilleros mas tiene que avanzar o retrocer"""
-
-        if tablero_lista[indice_us] == 0 :
-            return 0
-        else:
-            return tablero_lista[indice_us] + cant_movimiento_adicionales(tablero_lista , indice_us + tablero_lista[indice_us])
-
-def intercambiar_i_usuario(tablero:list, indice_usuario:int, indice_nuevo_usuario:int):
+def imprimir_segun_booleano(criterio: bool, verdadero:str, falso:str):
     """
-    Funcion que intercambia el valor dentro del indice_usuario: y el valor dentro del indice usuario mas
-    el parametro movimiento:
+    Funcion que imprime uno de los dos string segun el booleano pasado como parametro
+
+    Parametros:
     
+    criterio: un booleano que determina que string e sel que se va a imprimir
+
+    verdadero: la cadena de texto que se debera imprimir si el criterio es verdadero
+
+    falso: la cadena de texto que se debera  
+    """
+    if criterio:
+        print(verdadero)
+    else:
+        print(falso)
+
+
+def anexar_score(nombre:str, puntuacion:int):
+    """
+    Funcion que anexa el nombre y la puntuacion del usuario en un archivo
+
     Parametros:
 
-    tablero: la lista donde haremos el swapeo
+    nombre: un string que seria el nombre del usuario y el que primero anexaremos
 
-    indice_usuario: Un entero que representa el indice del usuario
-
-    movimiento: un entero que se sumara al indice usuario
-
+    puntuacion: un entero que seria el indice del usuario y el segundo que anexaremos
     """
-    aux = tablero[indice_usuario]
-    tablero[indice_usuario] = tablero[indice_nuevo_usuario]
-    tablero[indice_nuevo_usuario] = aux
-
-def guardar_score(indice_usuario:int, nombre_usuario:str):
-    import os
-    os.remove("score.csv")
-    if os.path.exists("score.csv"):
-        archivo = open("score.csv","a")
-        archivo.write(f"{nombre_usuario},{indice_usuario} \n ")
-    else:
-        archivo = open("score.csv","w")
-        archivo.write("Nombre,Puntaje \n")
-        archivo.write(f"{nombre_usuario},{indice_usuario} \n")
+    archivo = open("score.csv", "a")
+    archivo.write(nombre + "," + str(puntuacion) + "\n")
     archivo.close()
+
+def mover_usuario(indice_usuario:int, criterio:bool, avanzar:int, retroceder:int)->int:
+    """
+    funcion que mueve al usuario dependien de un criterio, si es verdadero el usuario avanza
+    si el falso el usuario retrocede
+
+    Parametros:
+
+    indice_usuario: un entero que determina en donde esta parado el usuario
+
+    criterio: un booleano que determina si el usuario tiene que avanzar o retroceder
+
+    avanzar: un entero que indica cuantos casilleros avanzara
+
+    retroceder: un entero que indica cuantos casilleros retrocedera 
+
+    Retorno:
+        devuelve un entero que indicaria la posicion donde quedo el usuario
+    """
+    if criterio:
+        indice_usuario += avanzar
+    else:
+        indice_usuario -= retroceder
+    return indice_usuario
+
+def buscar_movimiento_adicional(tablero:list , indice:int)->int:
+    """
+    funcion que busca en el tablero, el valor que esta en un indice
+
+    Parametros:
+
+    tablero: una lista que determina el tablero
+
+    indice: un entero que determina un indice
+
+    Retorno:
+        devuelve un valor que esta en ese indice del tablero
+    """
+    return tablero[indice]
+
+def mover_adicional_usuario(indice_usuario:int,criterio:bool, adicional:int)->int:
+    """
+    funcion que mueve al usuario adicionalmente segun el criterio, si es verdadero avanza, si es falso retrocede
+
+    Parametros:
+
+    indice_usuario: entero determina el indice del usuario
+
+    criterio: un booleano que influye si el usuairo avanza o retroce adicionalmente
+
+    adicional: un entero que indica la cantidad de casilleros que se movera el usuario
+
+    Retorno:
+        devuelve un entero que indica la posicion actual del usuario despues del movimiento
+    """
+    if criterio:
+        indice_usuario += adicional
+    else:
+        indice_usuario -= adicional
+    return indice_usuario
+
+    
+def verificar_booleanos_iguales(bool_1:bool, bool_2: bool, bool_3: bool) ->bool:
+    """
+    Funcion que compara 3 valores booleanos, si son iguales o no
+
+    Parametro:
+    bool_1: un booleano que se comparara con los otros
+
+    bool_2: Otro booleano que sera comparado con los otros
+
+    bool_3: ultimo booleano que tambien sera comparado con los otros
+
+    Retorno:
+        deuvelve un booleano verdadero si los 3 booleanos pasados como parametros son iguales, sino devuelve falso
+    """
+    iguales_booleanos = False
+    if bool_1 == bool_2 == bool_3:
+        iguales_booleanos = True
+    return iguales_booleanos

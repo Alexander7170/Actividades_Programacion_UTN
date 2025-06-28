@@ -34,10 +34,9 @@ capsula_verde = pygame.image.load("Imagenes/figura_capsula_verde.png")
 fondo_inicio_pantalla = pygame.image.load("Imagenes/fondo_inicio_pantalla.png")
 
 
-fuente_subtitulos = pygame.font.SysFont("Comic Sans MS",55)
+fuente_subtitulos = pygame.font.SysFont("Comic Sans MS",50)
 fuente_titulo = pygame.font.SysFont("Cooper Black",65)
 fuentes = pygame.font.get_fonts()
-print(fuentes)
 texto_jugar = fuente_subtitulos.render("J u g a r", True , COLOR_NEGRO,)
 texto_score = fuente_subtitulos.render("S c o r e", True, COLOR_NEGRO)
 texto_salir = fuente_subtitulos.render("S a l i r", True, COLOR_NEGRO)
@@ -46,7 +45,7 @@ texto_titulo_a = fuente_titulo.render("Escaleras",True, COLOR_NEGRO)
 texto_titulo_b = fuente_titulo.render("Y",True, COLOR_NEGRO)
 texto_titulo_c = fuente_titulo.render("Serpientes",True, COLOR_NEGRO)
 
-texto_pedir_nombre = fuente_subtitulos.render("Dime tu nombre: ",True,COLOR_NEGRO)
+texto_pedir_nombre = fuente_subtitulos.render(MENSAJE_PEDIR_NOMBRE,True,COLOR_NEGRO)
 rect_capsula_verde = capsula_verde.get_rect()
 
 rect_capsula_amarilla = capsula_amarilla.get_rect() # # DEVUELVE UNA SUPERFICIE INVICIBLE, UNA ZONA CON UN ALTO Y ANCHO DE LA IMAGEN
@@ -58,7 +57,7 @@ rect_capsula_amarilla.x = 250 # CAMBIO SU EJE X
 rect_capsula_amarilla.y = 420 # UBICO ESA ZONA INVICIBLE EN LA COORDENADA Y
 rect_capsula_roja.x = 250 # CAMBIO SU EJE X
 rect_capsula_roja.y = 520 # UBICO ESA ZONA INVICIBLE EN LA COORDENADA Y
-
+py
 
 pygame.display.set_caption("Trivia")
 correr_juego = True
@@ -86,15 +85,14 @@ while correr_juego:
                                 elif event.key == pygame.K_BACKSPACE:
                                     print("borrado")
                                     nombre = nombre[0:-1]
-                                else:
+                                elif len(nombre) <= 13:
                                     nombre += event.unicode
-                                print(nombre)
                             pantalla.blit(fondo_inicio_pantalla,(0,0))
-                            pygame.draw.line(pantalla,COLOR_NEGRO,(100,100),(500,500),5)
-                            pygame.draw.rect(pantalla,COLOR_GRIS,(50,100,200,100),5)
+                            pygame.draw.line(pantalla,COLOR_NEGRO,(200,250),(600,250),5)
+                            pygame.draw.rect(pantalla,COLOR_GRIS,(190,40,460,100),5)
                             texto_nombre = fuente_subtitulos.render(nombre,True,(0,0,0))
-                            pantalla.blit(texto_nombre,(150,200))
-                            pantalla.blit(texto_pedir_nombre,(100,200))
+                            pantalla.blit(texto_nombre,(200,180))
+                            pantalla.blit(texto_pedir_nombre,(200,50))
                             pygame.display.flip()
             elif rect_capsula_amarilla.collidepoint(posicion_click):
                 print("score")

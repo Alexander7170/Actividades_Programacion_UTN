@@ -16,7 +16,11 @@ Plan Pygame
     
 """
 
-lista = [1,2,3,4,5,6,7,8,9,10]
-print(lista[0:-2])
-caracteres = "holaquehace"
-print(caracteres[-1:-2])
+"""
+los archivos pueden contener imagenes, videos, textos, o audios
+
+Los archivos de texto continene caracteres legibles, que se pueden leer y comprender y modificarlo (txt, csv)
+Los archivos binarios no se pueden interpretar, se representa asi las imagenes, los sonidos, o un archivo comprimido
+
+Para abrir un archivo hay que usar el metodo open()
+"""
