@@ -34,7 +34,6 @@ while seguir_jugando:
     preguntas_agotadas = verificar_lista_vacia(copia_preguntas)
     seguir_jugando = verificar_booleanos_iguales(perdio,gano,preguntas_agotadas)
 
-    print(TABLERO)
     print(MENSAJE_INFORMAR_CASILLERO, (indice_usuario))
 
     if seguir_jugando:
@@ -46,4 +45,4 @@ while seguir_jugando:
         anexar_score(nombre_usuario, indice_usuario)
         print(MENSAJE_INFORMAR_CASILLERO, (indice_usuario))
 
-print("fin del programa")
+print(MENSJAE_FIN_PROGRAMA)

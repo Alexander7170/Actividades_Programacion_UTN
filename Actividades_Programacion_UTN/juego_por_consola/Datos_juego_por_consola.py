@@ -8,7 +8,7 @@ MENSAJE_CORRECTO = "Correcto"
 MENSAJE_INCORRECTO = "Incorrecto"
 MENSAJE_PEDIR_OPCION = "Que opcion eliges? "
 MENSAJE_INFORMAR_CASILLERO = "Quedaste en el casillero: "
-
+MENSJAE_FIN_PROGRAMA = "Fin del programa"
 
 TABLERO =  [0,1,0,0,0,3,0,0,0,0,0,1,0,0,2,0,1,0,0,0,1,0,0,2,0,0,0,1,1,1,0]
 preguntas = [
