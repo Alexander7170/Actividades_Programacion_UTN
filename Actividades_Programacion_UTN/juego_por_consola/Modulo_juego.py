@@ -1,39 +1,4 @@
 
-
-def verificar_perdedor(indice_usuario:int)->bool:
-    """
-    Funcion que verifica si indice pasado como parametro es igual a 0, osea que perdio ya
-
-    Parametros:
-
-    indice_usuario: un entero que indica el indice del usuario:
-
-    Retorno:
-        Devuelve un booleano verdadero si el el usuario esta en el indice 0, sino, devuelve falso
-    """
-    perdio = False
-    if indice_usuario == 0:
-        perdio = True
-    return perdio
-
-def verificar_ganador(tablero:list, indice_usuario:int)->bool:
-    """
-    Funcion que verifica si indice pasado como parametro es igual al ultimo indice del tablero
-
-    Parametros:
-
-    tablero: la lista donde verificaremos si el ultimo indice de esta lista es igual al indice del usuario
-
-    indice_usuario: Un entero que indica el indice del usuario
-
-    Retorno:
-        Devuelve un booleano verdadero si el indice del usuario es igual al ultimo indice del tablero, sino devuelve falso
-    """
-    gano = False
-    if indice_usuario == len(tablero) - 1:
-        gano = True
-    return gano
-    
 def pedir_dato(mensaje:str)->str:
     return input(mensaje)
 
@@ -92,7 +57,7 @@ def verificar_lista_vacia(lista:list)->bool:
         vacia = True
     return vacia
 
-def imprimir_valores(diccionario:dict, encabezado_de_diccionario:list, clave_excepcion: str):
+def imprimir_valores(diccionario:dict, clave_excepcion:str):
     """
     Funcion que imprime todos los valores del diccionario, excepto el valor que este dentro de una clave. 
     En paralelo, imprime por cada valor del diccionario, un valor de la lista de encabezados, osea el encabezado
@@ -105,11 +70,9 @@ def imprimir_valores(diccionario:dict, encabezado_de_diccionario:list, clave_exc
     clave_respuesta: un string que indica que indica que valor no se imprimira
 
     """
-    indice = 0
     for clave in diccionario:
-        if clave != clave_excepcion:
-            print(encabezado_de_diccionario[indice]," : ", diccionario[clave])
-            indice += 1
+        if clave != clave_excepcion: 
+            print((clave) + " : " + diccionario[clave])
 
 def verificar_respuesta(pregunta:dict, respuesta:str, clave_respuesta:str)->bool:
     """
@@ -131,7 +94,7 @@ def verificar_respuesta(pregunta:dict, respuesta:str, clave_respuesta:str)->bool
         acerto = True
     return acerto
 
-def buscar_valor(lista:list)->dict:
+def buscar_pregunta(lista:list)->dict:
     """
     Funcion que busca aleatoriamente un diccionario dentro de la lista:
 
@@ -146,7 +109,7 @@ def buscar_valor(lista:list)->dict:
     pregunta = random.choice(lista)
     return pregunta
 
-def eliminar_un_valor(lista:list, valor_a_eliminar:dict):
+def eliminar_una_pregunta(lista:list, valor_a_eliminar:dict):
     """
     Funcion que elimina un diccionario dentro de la lista de diccionarios
 
@@ -159,47 +122,9 @@ def eliminar_un_valor(lista:list, valor_a_eliminar:dict):
     """
     lista.remove(valor_a_eliminar)
 
-def verificar_casillero_vacio(tablero:list, indice_casillero:int)->bool:
-    """
-    Funcion que comprueba si donde esta el indice del usuario, 
-    en ciertos avances,si el casillero donde caeria esta vacio, osea un 0
-
-    Parametros:
-
-    tablero: una lista donde verificaremos si el valor de un indice es igual a 0
-
-    indice_usuario: Un entero que indica donde se encuentra el usuario
-
-    movimiento: Un entero que se le suma al indice del usuario
-
-    Retorno:
-        Devuelve un booleano verdadero si el  valor que esta en el
-        indice es igual a 0, sino devuelve falso
-        """
-    casillero_vacio = False
-    if tablero[indice_casillero] == 0:
-        casillero_vacio = True
-    return casillero_vacio
-
-def imprimir_segun_booleano(criterio: bool, verdadero:str, falso:str):
-    """
-    Funcion que imprime uno de los dos string segun el booleano pasado como parametro
-
-    Parametros:
-    
-    criterio: un booleano que determina que string e sel que se va a imprimir
-
-    verdadero: la cadena de texto que se debera imprimir si el criterio es verdadero
-
-    falso: la cadena de texto que se debera  
-    """
-    if criterio:
-        print(verdadero)
-    else:
-        print(falso)
 
 
-def anexar_score(nombre:str, puntuacion:int):
+def guardar_score(nombre:str, puntuacion:int):
     """
     Funcion que anexa el nombre y la puntuacion del usuario en un archivo
 
@@ -273,22 +198,9 @@ def mover_adicional_usuario(indice_usuario:int,criterio:bool, adicional:int)->in
         indice_usuario -= adicional
     return indice_usuario
 
-    
-def verificar_booleanos_iguales(bool_1:bool, bool_2: bool, bool_3: bool) ->bool:
-    """
-    Funcion que compara 3 valores booleanos, si son iguales o no
+def verificar_fin_juego(indice_usuario:int, tablero:list, preguntas:list)->bool:
+    fin_juego = False
+    if indice_usuario == 0 or len(preguntas) == 0 or indice_usuario == len(tablero)-1:
+        fin_juego = True
+    return fin_juego
 
-    Parametro:
-    bool_1: un booleano que se comparara con los otros
-
-    bool_2: Otro booleano que sera comparado con los otros
-
-    bool_3: ultimo booleano que tambien sera comparado con los otros
-
-    Retorno:
-        deuvelve un booleano verdadero si los 3 booleanos pasados como parametros son iguales, sino devuelve falso
-    """
-    iguales_booleanos = False
-    if bool_1 == bool_2 == bool_3:
-        iguales_booleanos = True
-    return iguales_booleanos

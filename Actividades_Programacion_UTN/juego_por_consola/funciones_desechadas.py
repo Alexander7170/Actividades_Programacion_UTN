@@ -25,7 +25,24 @@ def validar_avance_extra(tablero:list, avanzar:int, indice_usuario:int)->int:
        avanzar -= 1
    return avanzar
 
+def verificar_booleanos_iguales(bool_1:bool, bool_2: bool, bool_3: bool) ->bool:
+    """
+    Funcion que compara 3 valores booleanos, si son iguales o no
 
+    Parametro:
+    bool_1: un booleano que se comparara con los otros
+
+    bool_2: Otro booleano que sera comparado con los otros
+
+    bool_3: ultimo booleano que tambien sera comparado con los otros
+
+    Retorno:
+        deuvelve un booleano verdadero si los 3 booleanos pasados como parametros son iguales, sino devuelve falso
+    """
+    iguales_booleanos = False
+    if bool_1 == bool_2 == bool_3:
+        iguales_booleanos = True
+    return iguales_booleanos
 def validar_retroceso_extra(retroceder:int, indice_usuario:int)->int:
     while retroceder - 1 + indice_usuario < 0:
         retroceder += 1
@@ -117,3 +134,38 @@ def imprimir_tablero(tablero:list):
         valores_casilleros += str(tablero[i]) + " " * len(str(i)) + "|"
     print("Valores:    ", valores_casilleros)
     print("Casilleros: ", indices_casilleros)
+
+def verificar_perdedor(indice_usuario:int)->bool:
+    """
+    Funcion que verifica si indice pasado como parametro es igual a 0, osea que perdio ya
+
+    Parametros:
+
+    indice_usuario: un entero que indica el indice del usuario:
+
+    Retorno:
+        Devuelve un booleano verdadero si el el usuario esta en el indice 0, sino, devuelve falso
+    """
+    perdio = False
+    if indice_usuario == 0:
+        perdio = True
+    return perdio
+
+def verificar_ganador(tablero:list, indice_usuario:int)->bool:
+    """
+    Funcion que verifica si indice pasado como parametro es igual al ultimo indice del tablero
+
+    Parametros:
+
+    tablero: la lista donde verificaremos si el ultimo indice de esta lista es igual al indice del usuario
+
+    indice_usuario: Un entero que indica el indice del usuario
+
+    Retorno:
+        Devuelve un booleano verdadero si el indice del usuario es igual al ultimo indice del tablero, sino devuelve falso
+    """
+    gano = False
+    if indice_usuario == len(tablero) - 1:
+        gano = True
+    return gano
+    
