@@ -14,17 +14,17 @@ pygame.display.set_caption("Trivia")
 fuente_subtitulos = pygame.font.SysFont("Comic Sans MS",50)
 fuente_titulo = pygame.font.SysFont("Cooper Black",60)
 fuente_pregunta = pygame.font.SysFont("Arial",30)
-fuente_opciones = pygame.font.SysFont("Cooper Black", 25)
+fuente_opciones = pygame.font.SysFont("Cooper Black", 20)
 estilo_texto_valores = {"fuente":fuente_subtitulos, "color": COLOR_NEGRO }
 estilo_texto_opciones = {"fuente": fuente_opciones, "color":COLOR_NEGRO}
 fuente_score = pygame.font.SysFont("Comic Sans MS",40)
 pygame.mixer.music.load("y2mate.mp3")
 
-
-
 nombre_usuario = ""
 opcion_usuario = ""
 ubicacion_pregunta = (100,500)
+timer_segundos = pygame.USEREVENT
+reloj = pygame.time.Clock()
 cronometro = 0
 imagen_texto_cronometro = fuente_subtitulos.render(str(cronometro),True,COLOR_NEGRO)
 
@@ -38,6 +38,7 @@ imagen_texto_salir = fuente_subtitulos.render("S a l i r", True, COLOR_NEGRO)
 imagen_texto_peticion_nombre = fuente_subtitulos.render(MENSAJE_PEDIR_NOMBRE ,True,COLOR_NEGRO)
 imagen_texto_fin_juego = fuente_subtitulos.render(MENSAJE_FIN_PROGRAMA,True,COLOR_NEGRO)
 imagen_texto_mensaje_casillero = fuente_subtitulos.render(MENSAJE_INFORMAR_CASILLERO,True,COLOR_NEGRO)
+
 rect_opcion_fin_juego = imagen_casillero_negro.get_rect()
 rect_opcion_jugar = imagen_rectangulo_verde.get_rect()
 rect_opcion_score = imagen_rectangulo_amarillo.get_rect() 
@@ -45,7 +46,6 @@ rect_opcion_salir = imagen_rectangulo_rojo.get_rect()
 rect_opcion_a = imagen_rectangulo_verde.get_rect()
 rect_opcion_b = imagen_rectangulo_verde.get_rect()
 rect_opcion_c = imagen_rectangulo_verde.get_rect()
-
 rect_opcion_volver_menu = imagen_casillero_negro.get_rect()
 
 rect_opcion_a.topleft = (20,600)
@@ -54,7 +54,6 @@ rect_opcion_c.topleft = (620,600)
 rect_opcion_jugar.topleft = (320,320) 
 rect_opcion_score.topleft = (320,420)
 rect_opcion_salir.topleft = (320,520)
-
 rect_opcion_volver_menu.topleft = (0,0)
 
 ancho_imagen_casillero_azul = casillero_azul.get_width()
@@ -65,33 +64,34 @@ distancia_entre_casilleros = {"distancia_x":ancho_imagen_casillero_azul, "distan
 imagenes_casilleros = {"casillero_azul": casillero_azul, "casillero_verde":casillero_verde, "casillero_rojo": casillero_rojo, "casillero_amarillo":casillero_amarillo}
 
 configuracion_cronometro = [{IMAGEN: casillero_negro, UBICACION: (0,400)},
-                            {IMAGEN: imagen_texto_cronometro, UBICACION: (0,400)}]
+                            {IMAGEN: imagen_texto_cronometro, UBICACION: (40,400)}]
 
 clave_imagen_texto_pregunta = "imagen_texto_pregunta"
 clave_imagen_texto_opcion = "imagen_texto_opcion"
 
 configuracion_preguntas_opciones = {
-    "pregunta":{"imagen_fondo":imagen_marco_pregunta, "ubicacion_fondo": (50,500)},
-    "opcion_a":{"imagen_fondo":imagen_rectangulo_amarillo, "ubicacion_fondo": rect_opcion_a},
-    "opcion_b":{"imagen_fondo":imagen_rectangulo_amarillo, "ubicacion_fondo":rect_opcion_b},
-    "opcion_c":{"imagen_fondo":imagen_rectangulo_amarillo, "ubicacion_fondo":rect_opcion_c}}
+    "pregunta":{"imagen_fondo":imagen_marco_pregunta, "ubicacion_fondo": (10,500), "ubicacion_texto":(80,500)},
+    "opcion_a":{"imagen_fondo":imagen_rectangulo_amarillo, "ubicacion_fondo": rect_opcion_a, "ubicacion_texto":(rect_opcion_a.x + 20, rect_opcion_a.y+20)},
+    "opcion_b":{"imagen_fondo":imagen_rectangulo_amarillo, "ubicacion_fondo":rect_opcion_b, "ubicacion_texto":(rect_opcion_b.x + 20, rect_opcion_b.y+20)},
+    "opcion_c":{"imagen_fondo":imagen_rectangulo_amarillo, "ubicacion_fondo":rect_opcion_c, "ubicacion_texto":(rect_opcion_c.x + 20, rect_opcion_c.y+20)}}
+
+
+configuracion_menu = [{IMAGEN:portada, UBICACION: (50,0)},
+                      {IMAGEN:imagen_rectangulo_verde, UBICACION: rect_opcion_jugar},
+                      {IMAGEN:imagen_texto_jugar, UBICACION:(rect_opcion_jugar.x + 10 ,rect_opcion_jugar.y)},
+                      {IMAGEN:imagen_rectangulo_amarillo, UBICACION:rect_opcion_score},
+                      {IMAGEN:imagen_texto_score, UBICACION:(rect_opcion_score.x +10, rect_opcion_score.y)},
+                      {IMAGEN:imagen_rectangulo_rojo, UBICACION: rect_opcion_salir},
+                      {IMAGEN:imagen_texto_salir, UBICACION:(rect_opcion_salir.x + 10, rect_opcion_salir.y)}]
 
 configuracion_pantalla_escribiendo = [{IMAGEN: imagen_texto_peticion_nombre, UBICACION: (200,50)},
                                       {IMAGEN: imagen_texto_nombre_usuario, UBICACION: (190,190)}]
 
-configuracion_menu = [{"imagen_fondo":portada, "ubicacion_fondo": (50,0)},
-                      {"imagen_fondo":imagen_rectangulo_verde,"imagen_texto": imagen_texto_jugar, "ubicacion_fondo": rect_opcion_jugar},
-                      {"imagen_fondo":imagen_rectangulo_amarillo, "imagen_texto":imagen_texto_score, "ubicacion_fondo":rect_opcion_score},
-                      {"imagen_fondo":imagen_rectangulo_rojo, "imagen_texto": imagen_texto_salir, "ubicacion_fondo":rect_opcion_salir}]
-
-timer_segundos = pygame.USEREVENT
-reloj = pygame.time.Clock()
 
 rects = {OPCION_JUGAR: rect_opcion_jugar, OPCION_SCORE: rect_opcion_score, OPCION_SALIR:rect_opcion_salir, 
         OPCION_A: rect_opcion_a, OPCION_B: rect_opcion_b, OPCION_C:rect_opcion_c, OPCION_VOLVER_MENU:rect_opcion_volver_menu}
 
 estado_pantalla = {CORRER_JUEGO:True, VIENDO_MENU: False, VIENDO_SCORE: False, JUGANDO: False, ESCRIBIENDO_NOMBRE: True }
-
 inicializacion = {VIENDO_MENU: False, VIENDO_SCORE:False, JUGANDO:False}
 
 configuracion_pantalla_fin_juego = [{IMAGEN:casillero_blanco,UBICACION:(150,100)},
@@ -126,7 +126,7 @@ while estado_pantalla[CORRER_JUEGO]:
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 posicion_click = evento.pos
                 cambiar_estado_pantalla_click(rects, posicion_click, estado_pantalla, inicializacion)
-        imprimir_menu(pantalla, configuracion_menu)
+        imprimir_configuracion(pantalla, configuracion_menu)
 
     if estado_pantalla[JUGANDO]:
 
@@ -147,6 +147,12 @@ while estado_pantalla[CORRER_JUEGO]:
                 posicion_click = evento.pos
                 respuesta_usuario = cambiar_string_click(rects, posicion_click, respuesta_usuario)
                 estado_pantalla[VIENDO_MENU] = verificar_colicion_con_click(rects[OPCION_VOLVER_MENU],posicion_click)
+                if estado_pantalla[VIENDO_MENU]:
+                    pygame.time.set_timer(timer_segundos, 0)
+                    estado_pantalla[JUGANDO] = False
+                    if fin_juego == False:
+                        guardar_score(nombre_usuario,indice_usuario)
+
                 if respuesta_usuario != "" and fin_juego == False and estado_pantalla[VIENDO_MENU] == False:
                     puso_una_opcion_a_pregunta = True
 
@@ -157,7 +163,7 @@ while estado_pantalla[CORRER_JUEGO]:
         if cambiar_pregunta:
             pregunta = buscar_pregunta(copia_preguntas)
             eliminar_una_pregunta(copia_preguntas,pregunta)
-            imagenes_pregunta_opciones = renderizar_valores_dic(pregunta,CLAVE_RESPUESTA_CORRECTA,fuente_pregunta,COLOR_NEGRO)
+            imagenes_pregunta_opciones = renderizar_valores_dic(pregunta,CLAVE_RESPUESTA_CORRECTA,fuente_opciones,COLOR_NEGRO)
             modificar_configuracion(configuracion_preguntas_opciones,imagenes_pregunta_opciones)
             cambiar_pregunta = False
 
@@ -169,7 +175,7 @@ while estado_pantalla[CORRER_JUEGO]:
             puso_una_opcion_a_pregunta = False
             pygame.time.set_timer(timer_segundos, 0)
             fin_juego = verificar_fin_juego(indice_usuario,TABLERO,copia_preguntas)
-            if fin_juego == True or estado_pantalla[VIENDO_MENU] == True:
+            if fin_juego == True:
                 configuracion_pantalla_fin_juego[2][IMAGEN] = configuracion_pantalla_escribiendo[1][IMAGEN]
                 configuracion_pantalla_fin_juego[4][IMAGEN] = fuente_subtitulos.render(str(indice_usuario),True,COLOR_NEGRO)
                 guardar_score(nombre_usuario,indice_usuario)
@@ -186,9 +192,7 @@ while estado_pantalla[CORRER_JUEGO]:
         imprimir_tablero_pygame(pantalla,TABLERO,imagenes_casilleros,punto_origen_tablero,distancia_entre_casilleros,6,indice_usuario,estilo_texto_valores)
         imprimir_opciones_y_pregunta(pantalla, configuracion_preguntas_opciones)
         if fin_juego:
-            imprimir_configuracion(pantalla,configuracion_pantalla_fin_juego)
-        if estado_pantalla[VIENDO_MENU] == True:
-            estado_pantalla[JUGANDO] = False
+            imprimir_configuracion(pantalla,configuracion_pantalla_fin_juego)   
         pantalla.blit(imagen_texto_exit,(rect_opcion_fin_juego))
 
     if estado_pantalla[VIENDO_SCORE]:
