@@ -199,6 +199,20 @@ def mover_adicional_usuario(indice_usuario:int,criterio:bool, adicional:int)->in
     return indice_usuario
 
 def verificar_fin_juego(indice_usuario:int, tablero:list, preguntas:list)->bool:
+    """
+    Funcion que verifica si el juego ya a concluido o aun sigue en pie
+    
+    Parametros:
+        indice_usuario: un entero que determina la posicion actual del usuario
+
+        tablero: una lista de enteros, representa el tablero
+
+        preguntas: una lista de diccionaros, representan las preguntas que aun quedas
+
+    Retorno:
+        Devuelve un booleano verdadero si el usuario quedo en el ultimo casillero o en el primero
+        o si la lista de preguntas esta vacia, sino devuelve falso
+    """
     fin_juego = False
     if indice_usuario == 0 or len(preguntas) == 0 or indice_usuario == len(tablero)-1:
         fin_juego = True

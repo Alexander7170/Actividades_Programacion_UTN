@@ -1,5 +1,5 @@
 from Modulo_juego import *
-from constantes_juego_consola import *
+from datos_consola import *
 
 nombre_usuario = pedir_dato(MENSAJE_PEDIR_NOMBRE)
 indice_usuario = PUNTO_DE_PARTIDA

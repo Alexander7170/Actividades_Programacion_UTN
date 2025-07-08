@@ -1,5 +1,5 @@
 import pygame
-from constantes_pygame import *
+from datos_pygame import *
 def imprimir_menu_escribir(pantalla:pygame.Surface, configuracion:list, color:tuple):
     """
     Funcion que imprime en una superficie, las imagenes de configuracion con sus respectivas ubicaciones ya definidas y ademas 
@@ -17,8 +17,8 @@ def imprimir_menu_escribir(pantalla:pygame.Surface, configuracion:list, color:tu
     """
     pygame.draw.line(pantalla,color,(200,250),(600,250),5)
     pygame.draw.rect(pantalla,color,(190,40,460,100),5)
-    for i in range(len(configuracion)):
-        pantalla.blit(configuracion[i][IMAGEN],configuracion[i][UBICACION])
+    for opcion in configuracion:
+        pantalla.blit(configuracion[opcion][IMAGEN],configuracion[opcion][UBICACION])
 
 
 def imprimir_configuracion(pantalla:pygame.Surface, configuracion:list):
@@ -32,8 +32,8 @@ def imprimir_configuracion(pantalla:pygame.Surface, configuracion:list):
         configuracion: una lista donde sus elementos son diccionarios, los cuales cada diccionario
                     tiene sus respectivas imagenes, con sus respectivas coordenadas de fundicion en pantalla
     """
-    for i in range(len(configuracion)):
-        pantalla.blit(configuracion[i][IMAGEN],configuracion[i][UBICACION])
+    for opcion in configuracion:
+        pantalla.blit(configuracion[opcion][IMAGEN],configuracion[opcion][UBICACION])
 
 def imprimir_tablero_pygame(pantalla:pygame.Surface, tablero:list, imagenes:dict, punto_origen:dict, dist_entre_casilleros:dict, cant_columna:int, indice_usuario:int, estilo_texto:dict):
     """
@@ -277,8 +277,8 @@ def imprimir_score(pantalla:pygame.Surface,matriz_imagenes:list ,punto_inicio:tu
         distancia_entre_imagenes: una tupla donde sus valores indicas el distancia maxima entre imagenes
         color: una tuple que determina el color de la linea
     """
-    pygame.draw.line(pantalla,COLOR_NEGRO,(0,100),(900,100),4)
-    pygame.draw.line(pantalla,COLOR_NEGRO,(400,0),(400,700),4)
+    pygame.draw.line(pantalla,color,(0,100),(900,100),4)
+    pygame.draw.line(pantalla,color,(400,0),(400,700),4)
     eje_x = punto_inicio[0]
     eje_y = punto_inicio[1]
     for i in range(len(matriz_imagenes)):
