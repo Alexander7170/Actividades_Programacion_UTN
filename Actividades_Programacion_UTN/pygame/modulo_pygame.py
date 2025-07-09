@@ -1,27 +1,7 @@
 import pygame
 from datos_pygame import *
-def imprimir_menu_escribir(pantalla:pygame.Surface, configuracion:list, color:tuple):
-    """
-    Funcion que imprime en una superficie, las imagenes de configuracion con sus respectivas ubicaciones ya definidas y ademas 
-    dibuja una linea y un rectangulo 
-    
-    parametros:
 
-        pantalla: la superficie donde fundiremos las imagenes con sus ubicaciones y la linea y el rect
-
-        configuracion: una lista donde sus elementos son diccionarios, los cuales cada diccionario
-                    tiene sus respectivas imagenes, con sus respectivas coordenadas de fundicion en pantalla
-        
-        color: una tupla que representa el color designado para la linea y el rectangulo
-
-    """
-    pygame.draw.line(pantalla,color,(200,250),(600,250),5)
-    pygame.draw.rect(pantalla,color,(190,40,460,100),5)
-    for opcion in configuracion:
-        pantalla.blit(configuracion[opcion][IMAGEN],configuracion[opcion][UBICACION])
-
-
-def imprimir_configuracion(pantalla:pygame.Surface, configuracion:list):
+def imprimir_configuracion(pantalla:pygame.Surface, configuracion:dict):
     """
     Funcion que imprime en una superficie, las imagenes de configuracion con sus respectivas ubicaciones ya definidas
     
@@ -33,8 +13,10 @@ def imprimir_configuracion(pantalla:pygame.Surface, configuracion:list):
                     tiene sus respectivas imagenes, con sus respectivas coordenadas de fundicion en pantalla
     """
     for opcion in configuracion:
-        pantalla.blit(configuracion[opcion][IMAGEN],configuracion[opcion][UBICACION])
-
+        if IMAGEN_FONDO in configuracion[opcion]:
+            pantalla.blit(configuracion[opcion][IMAGEN_FONDO],configuracion[opcion][UBICACION_FONDO])
+        if IMAGEN_TEXTO in configuracion[opcion]:
+            pantalla.blit(configuracion[opcion][IMAGEN_TEXTO], configuracion[opcion][UBICACION_TEXTO])
 def imprimir_tablero_pygame(pantalla:pygame.Surface, tablero:list, imagenes:dict, punto_origen:dict, dist_entre_casilleros:dict, cant_columna:int, indice_usuario:int, estilo_texto:dict):
     """
     Funcion que imprime un dato tipo lista de numeros, en una tablero con un limite de columana por fila y cambiado de sentido por cada fila
@@ -53,12 +35,12 @@ def imprimir_tablero_pygame(pantalla:pygame.Surface, tablero:list, imagenes:dict
     """
     sentido_derecho = True
     sentido_izquierdo = False
-    eje_x = punto_origen["eje_x"]
-    eje_y = punto_origen["eje_y"]
+    eje_x = punto_origen[EJE_X]
+    eje_y = punto_origen[EJE_Y]
     for i in range(len(tablero)):
         if i % cant_columna == 0:
             if i != 0:
-                eje_y -= dist_entre_casilleros["distancia_y"]
+                eje_y -= dist_entre_casilleros[EJE_Y]
                 if sentido_derecho:
                     sentido_izquierdo = True
                     sentido_derecho = False
@@ -66,10 +48,12 @@ def imprimir_tablero_pygame(pantalla:pygame.Surface, tablero:list, imagenes:dict
                     sentido_derecho = True
                     sentido_izquierdo = False
         elif sentido_derecho:
-            eje_x += dist_entre_casilleros["distancia_x"]
+            eje_x += dist_entre_casilleros[EJE_X]
         elif sentido_izquierdo:
-            eje_x -= dist_entre_casilleros["distancia_x"]
+            eje_x -= dist_entre_casilleros[EJE_X]
+
         imagen_numero = estilo_texto["fuente"].render(str(tablero[i]),True,estilo_texto["color"])
+
         if i == indice_usuario:
             pantalla.blit(imagenes["casillero_azul"],(eje_x,eje_y))
         elif tablero[i] == 0:
@@ -81,18 +65,6 @@ def imprimir_tablero_pygame(pantalla:pygame.Surface, tablero:list, imagenes:dict
         elif i > indice_usuario:
             pantalla.blit(imagenes["casillero_verde"],(eje_x,eje_y))
             pantalla.blit(imagen_numero,(eje_x,eje_y))
-
-def imprimir_opciones_y_pregunta(pantalla:pygame.Surface, configuracion:list):
-    """
-    Funcion que funde en pantalla todas las imagenes de la configuracion con sus respectivas ubicaciones
-    
-    Parametros:
-        Pantalla: una superficie que es donde se fundira todas las imagenes
-        configuracion: una lista donde se encuentra cada imagen con su respectiva coordenada en la pantalla
-    """
-    for sector in configuracion:
-        pantalla.blit(configuracion[sector]["imagen_fondo"],configuracion[sector]["ubicacion_fondo"])
-        pantalla.blit(configuracion[sector]["imagen_texto"],configuracion[sector]["ubicacion_texto"])
         
 def renderizar_valores_dic(valor_dic:dict, clave_excepcion:str, fuente:pygame.font.Font, color:tuple)->list:
     """
@@ -124,8 +96,8 @@ def modificar_configuracion(configuracion:dict, imagenes:list):
         imagenes: la lista de imagenes, que son los valores que se guardaran en la configuracion
     """
     indice = 0
-    for clave in configuracion:
-        configuracion[clave]["imagen_texto"] = imagenes[indice]
+    for sector in configuracion:
+        configuracion[sector][IMAGEN_TEXTO] = imagenes[indice]
         indice += 1
 
 def verificar_colicion_con_click(rect:pygame.Rect,coordenada:tuple)->bool:

@@ -70,9 +70,12 @@ def imprimir_valores(diccionario:dict, clave_excepcion:str):
     clave_respuesta: un string que indica que indica que valor no se imprimira
 
     """
+    encabezado = ["PREGUNTA","A","B","C"]
+    indice = 0
     for clave in diccionario:
         if clave != clave_excepcion: 
-            print((clave) + " : " + diccionario[clave])
+            print(encabezado[indice]," : ", diccionario[clave])
+        indice += 1
 
 def verificar_respuesta(pregunta:dict, respuesta:str, clave_respuesta:str)->bool:
     """
@@ -94,35 +97,18 @@ def verificar_respuesta(pregunta:dict, respuesta:str, clave_respuesta:str)->bool
         acerto = True
     return acerto
 
-def buscar_pregunta(lista:list)->dict:
+def manejar_pregunta(lista:list)->dict:
     """
     Funcion que busca aleatoriamente un diccionario dentro de la lista:
-
     parametros:
-
-    lista: Lista de diccionarios donde buscaremos un diccionario aleatoriamente
-
+        lista: Lista de diccionarios donde buscaremos un diccionario aleatoriamente
     Retorno:
         devuelve un diccionario cualquiera dentro de la lista
     """
     import random
     pregunta = random.choice(lista)
+    lista.remove(pregunta)
     return pregunta
-
-def eliminar_una_pregunta(lista:list, valor_a_eliminar:dict):
-    """
-    Funcion que elimina un diccionario dentro de la lista de diccionarios
-
-    Parametros:
-
-    lista: la lista de diccionarios donde se encuentra el diccionario que se  eliminara
-
-    diccionario_eliminar: un diccionario el cual existe en la lista y es el que vamos a eliminar:
-
-    """
-    lista.remove(valor_a_eliminar)
-
-
 
 def guardar_score(nombre:str, puntuacion:int):
     """
@@ -138,7 +124,7 @@ def guardar_score(nombre:str, puntuacion:int):
     archivo.write(nombre + "," + str(puntuacion) + "\n")
     archivo.close()
 
-def mover_usuario(indice_usuario:int, criterio:bool, avanzar:int, retroceder:int)->int:
+def mover_usuario(indice_usuario:int, tablero:list, criterio:bool, avanzar:int, retroceder:int)->int:
     """
     funcion que mueve al usuario dependien de un criterio, si es verdadero el usuario avanza
     si el falso el usuario retrocede
@@ -158,44 +144,12 @@ def mover_usuario(indice_usuario:int, criterio:bool, avanzar:int, retroceder:int
     """
     if criterio:
         indice_usuario += avanzar
+        movimiendo_extra = tablero[indice_usuario]
+        indice_usuario += movimiendo_extra 
     else:
         indice_usuario -= retroceder
-    return indice_usuario
-
-def buscar_movimiento_adicional(tablero:list , indice:int)->int:
-    """
-    funcion que busca en el tablero, el valor que esta en un indice
-
-    Parametros:
-
-    tablero: una lista que determina el tablero
-
-    indice: un entero que determina un indice
-
-    Retorno:
-        devuelve un valor que esta en ese indice del tablero
-    """
-    return tablero[indice]
-
-def mover_adicional_usuario(indice_usuario:int,criterio:bool, adicional:int)->int:
-    """
-    funcion que mueve al usuario adicionalmente segun el criterio, si es verdadero avanza, si es falso retrocede
-
-    Parametros:
-
-    indice_usuario: entero determina el indice del usuario
-
-    criterio: un booleano que influye si el usuairo avanza o retroce adicionalmente
-
-    adicional: un entero que indica la cantidad de casilleros que se movera el usuario
-
-    Retorno:
-        devuelve un entero que indica la posicion actual del usuario despues del movimiento
-    """
-    if criterio:
-        indice_usuario += adicional
-    else:
-        indice_usuario -= adicional
+        movimiendo_extra = tablero[indice_usuario] 
+        indice_usuario -= movimiendo_extra
     return indice_usuario
 
 def verificar_fin_juego(indice_usuario:int, tablero:list, preguntas:list)->bool:
