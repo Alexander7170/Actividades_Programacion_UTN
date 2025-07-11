@@ -1,11 +1,11 @@
+
 ANCHO_VENTANA = 900
 ALTO_VENTANA = 700
 FPS = 60
 TIEMPO_MAXIMO = 7
 MAXIMO_CARACTERES = 10
-ANCHO_VENTANA = 900
-ALTO_VENTANA = 700
 COLOR_NEGRO = (0,0,0)
+COLOR_BLANCO = (255,255,255)
 cronometro = 0
 nombre_usuario = ""
 opcion_usuario = ""
@@ -13,36 +13,21 @@ PUNTO_DE_PARTIDA = 15
 MOVERSE_RESPUESTA_CORRECTA = 1
 MOVERSE_RESPUESTA_INCORRECTA = 1
 CLAVE_RESPUESTA_CORRECTA = "respuesta_correcta"
-CLAVE_PREGUNTA = "pregunta"
-MENSAJE_PEDIR_NOMBRE = "Cual es tu nombre? "
-MENSAJE_INFORMAR_CASILLERO = "Quedaste en el casillero: "
-MENSAJE_FIN_PROGRAMA = "Fin del programa"
 TABLERO =  [0,0,1,0,2,0,1,1,0,0,0,2,0,1,0,0,1,1,1,0,2,0,3,0,1,0,1,2,0,0,0]
 
 #claves
-MENSAJE_FIN_PROGRAMA = "Fin del programa"
 ESCRIBIENDO_NOMBRE = "clave_escribiendo_nombre"
 VIENDO_MENU = "clave_viendo_menu"
 VIENDO_SCORE = "clave_viendo_score"
-VIENDO_FIN_JUEGO = "clave_viendo_fin_juego"
-USUARIO_MOVIDO = "clave_usuario_movido"
-INICIO_CRONOMETRO = "clave_inicio_cronometro"
 CORRER_JUEGO = "clave_correr_juego"
 JUGANDO = "clave_jugando"
-JUEGO_TERMINADO = "clave_juego_terminado"
-ELIGIO_OPCION_PREGUNTA = "clave_eligio_opcion_pregunta"
-OPCION_JUGAR = "clave_rect_opcion_jugar"
-OPCION_SCORE = "clave_rect_opcion_score"
-OPCION_SALIR = "clave_rect_opcion_salir"
-OPCION_A = "clave_rect_opcion_a"
-OPCION_B = "clave_rect_opcion_b"
-OPCION_C = "clave_rect_opcion_c"
-OPCION_FIN_JUEGO = "cllave_rect_opcion_fin_juego"
-OPCION_MENU = "clave_rect_opcion_menu"
-OPCION_VOLVER_MENU = "clave_rect_opcion_volver_menu"
+
 IMAGEN_FONDO = "clave_imagen_fondo"
 IMAGEN_TEXTO = "clave_imagen_texto"
 UBICACION_FONDO = "clave_ubicacion_fondo"
 UBICACION_TEXTO = "clave_ubicacion_texto"
-EJE_X = "clave_eje_x"
-EJE_Y = "clave_eje_Y"
+import pygame
+pygame.init()
+fuente_grande = pygame.font.SysFont("Comic Sans MS",40)
+fuente_mediana = pygame.font.SysFont("Comic Sans MS",30)
+fuente_pequeña = pygame.font.SysFont("Arial", 20)

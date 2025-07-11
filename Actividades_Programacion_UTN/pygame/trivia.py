@@ -1,13 +1,3 @@
-PUNTO_DE_PARTIDA = 15
-MOVERSE_RESPUESTA_CORRECTA = 1
-MOVERSE_RESPUESTA_INCORRECTA = 1
-CLAVE_RESPUESTA_CORRECTA = "respuesta_correcta"
-CLAVE_PREGUNTA = "pregunta"
-MENSAJE_PEDIR_NOMBRE = "Cual es tu nombre? "
-MENSAJE_INFORMAR_CASILLERO = "Quedaste en el casillero: "
-MENSAJE_FIN_PROGRAMA = "Fin del programa"
-
-TABLERO =  [0,0,1,0,2,0,1,1,0,0,0,2,0,1,0,0,1,1,1,0,2,0,3,0,1,0,1,2,0,0,0]
 preguntas = [
     {
         "pregunta": "¿Cuál es el país más grande del mundo por superficie?",
