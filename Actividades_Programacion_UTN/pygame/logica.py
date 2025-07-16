@@ -1,57 +1,3 @@
-
-def pedir_dato(mensaje:str)->str:
-    return input(mensaje)
-
-def validar_string(string:str,opcion1:str, opcion2:str)->str:
-    """
-    Funcion que obliga al usuario a que el string sea igual a una de la dos opciones
-
-    Parametros:
-        string: la cadena de caracter, que validaremos con una de las dos opciones
-        opcion1: Una cadena de caracteres, que es la primera opcion que puede tomar el string
-        opcion2: Una cadena de caracteres, que es la segunda opcion que puede tomar el string
-    RETORNO:
-        devuelve un string igual a una de las dos opciones
-    """
-    string = string.lower()
-    while string != opcion1 and string != opcion2:
-        string = input("ponga dentro de las opciones " + opcion1 + "/" + opcion2 + "  :  ").lower()
-    return string
-
-def verificar_palabra(palabra:str, palabra_a_comparar:str)->bool:
-    """
-    Funcion que verifica si la primera palabra es igual a la segunda palabra pasado como paremetro
-
-    Parametros:
-        palabra: un string que la que compararemos con la otra palabra
-        palabra_a_comparar: un string que se usara como la comparacion de la otra palabra
-    Retorno:
-        Devuelve un booleano verdadero si ambas palabras son iguales, sino devuelve falso 
-    """
-    palabras_iguales = False
-    if palabra == palabra_a_comparar:
-        palabras_iguales = True
-    return palabras_iguales
-
-def imprimir_valores(pregunta_opciones:dict):
-    """
-    Funcion que imprime valores de algunas claves del diccionario
-
-    Parametros:
-        pregunta_opciones: el diccionario cuyo valores imprimiremos 
-    """
-    print("pregunta: ", pregunta_opciones["pregunta"], "\n a:", pregunta_opciones["respuesta_a"], "\n b:",pregunta_opciones["respuesta_b"], "\n c:", pregunta_opciones["respuesta_c"])
-
-def pedir_dato_para_pregunta(mensaje:str)->str:
-    """
-    Funcion que pide un dato que sea "a", "b" o "c"
-    devuelve una de esos 3 caracteres
-    """
-    dato = input(mensaje).lower()
-    while dato != "a" and dato != "b" and dato != "c":
-        dato = input("error, " + mensaje).lower()
-    return dato
-
 def verificar_respuesta(pregunta:dict, respuesta:str, clave_respuesta:str)->bool:
     """
     Funcion que verifica si el parametro respuesta es igual al valor dentro de una clave
@@ -64,7 +10,7 @@ def verificar_respuesta(pregunta:dict, respuesta:str, clave_respuesta:str)->bool
         Devuelve un booleano verdadero si el valor respuesta es igual al valor dentro de la clave, sino devuelve falso
     """
     acerto = False
-    respuesta = respuesta.lower()
+    respuesta = respuesta
     if pregunta[clave_respuesta] == respuesta:
         acerto = True
     return acerto
@@ -177,14 +123,104 @@ def jugar_turno(indice_usuario:int, tablero:list, criterio:bool)->int:
     indice_usuario = mover_extra_usuario(criterio,indice_usuario,tablero)
     return indice_usuario
 
-def analizar_dato()->bool:
+def leer_score(score:str)->list:
     """
-    Funcion que llama a otras funciones, con el objetivo de obtener una respuesta del usuario
-    validarlo en don opciones, y verificarlo si dijo una opcion
+    Funcion que lee un archivo tipo csv y devuelve el texto
 
+    Parametros:
+        score: un string que representa el nombre del archivo
+    
     Retorno:
-        devuelve un booleano, si el usuario quiere jugar o no
+        Devuelve una lista anidada, donde cada sublista representa dada fila del texto, sin los saltos de linea,
+        y las columnas las determina el separador "," 
     """
-    dato = pedir_dato("Quiere jugar ?(si/no): ")
-    dato = validar_string(dato,"si","no")
-    return dato
+    texto = []
+    try:
+        with open(score,"r") as archivo:
+            for linea in archivo:
+                linea = linea.strip()
+                linea = linea.split(",")
+                texto.append(linea)
+    except:FileNotFoundError
+    return texto
+
+def ordenar_score_ascendentemente(matriz_usuarios:list):
+    """
+    funcion que ordena ascendentemente una matriz segun el comparamiento del segundo elemento de cada sublista
+    
+    Parametros:
+        matriz_usuarios: una lista anidada
+
+    """
+    for i in range(len(matriz_usuarios)-1):
+        for j in range(i+1,len(matriz_usuarios)):
+            if int(matriz_usuarios[i][1]) > int(matriz_usuarios[j][1]):
+                aux = matriz_usuarios[i]
+                matriz_usuarios[i] = matriz_usuarios[j]
+                matriz_usuarios[j] = aux
+
+def obtener_posiciones_matriz_score(matriz_imagenes:list)->list:
+    posiciones_imagenes = []
+    eje_x = 30
+    eje_y = 100
+    for i in range(len(matriz_imagenes)):
+        posicion_imagen = []
+        for j in range(len(matriz_imagenes[i])):
+            posicion_imagen.append((eje_x,eje_y))
+            eje_x += 400
+        posiciones_imagenes.append(tuple(posicion_imagen))
+        eje_y += 50
+        eje_x = 30
+    return tuple(posiciones_imagenes)
+
+def obtener_ubicacion_tablero_imagenes(tablero:list)->list:
+    """
+    Funcion que obtiene las ubicacion de las imagenes del tablero
+    donde cada imagen tendra su respectiva ubicacion
+
+    Devuelve una lista anidada, donde cada sublista representa la coordenada donde se ubicara la imagen 
+    """
+    ubicaciones_ordenada = []
+    sentido_derecho = True
+    sentido_izquierdo = False
+    eje_x = 120
+    eje_y = 400
+    for i in range(len(tablero)):
+        if i % 6 == 0:
+            if i != 0:
+                eje_y -= 78
+                if sentido_derecho:
+                    sentido_izquierdo = True
+                    sentido_derecho = False
+                elif sentido_izquierdo:
+                    sentido_derecho = True
+                    sentido_izquierdo = False
+        elif sentido_derecho:
+            eje_x += 115
+        elif sentido_izquierdo:
+            eje_x -= 115
+        ubicaciones_ordenada.append((eje_x,eje_y))
+
+    return ubicaciones_ordenada
+
+def obtener_imagenes_fondo_tablero(imagenes:dict,tablero:list,indice_usuario:int)->list:
+    """
+    Funcion que obtiene las imagenes del fondo del tablero, cambiando su color 
+    dependiendo de la posicion del usuario
+
+    Retorna una lista de imagenes del fondo
+
+    """
+    imagenes_fondo = []
+    for i in range(len(tablero)):
+        if i == indice_usuario:
+            imagen_fondo = imagenes["casillero_azul"]
+        elif tablero[i] == 0:
+            imagen_fondo = imagenes["casillero_amarillo"]
+
+        elif i < indice_usuario:
+            imagen_fondo = imagenes["casillero_rojo"]
+        elif i > indice_usuario:
+            imagen_fondo = imagenes["casillero_verde"]
+        imagenes_fondo.append(imagen_fondo)
+    return imagenes_fondo
