@@ -1,15 +1,3 @@
-def imprimir_numero(mensaje:str, entero:int):
-    print(mensaje, entero)
-
-def imprimir_mensaje(mensaje:str):
-    print(mensaje)
-
-def imprimir_float(decimal:float):
-    print(decimal)
-
-def imprimir_lista(lista:list):
-    print(lista)
-
 def retornar_pedido_decimal(mensaje:str)->float:
     decimal = float(input(mensaje))
     return decimal
