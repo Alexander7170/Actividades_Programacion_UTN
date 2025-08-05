@@ -16,16 +16,7 @@ def buscar_con_clave(lista_de_diccionarios:list, key:str)->list:
 
 def filtar_clave(lista_de_diccionarios:list ,clave:str)->list:
     """
-    Funcion que filtra una el nombre de la clave de cad diccionario en la lista de diccionarios
-
-    Parametros:
-
-        lista_de_diccionarios: una lista donde sus elementos son todos diccionarios y donde filtraremos un key
-        clave: un string que sera el filtro que le pondremos a la lista diccionario, el nombre del key
-
-    Retorno:
-        Devuelve una lista nueva con los elementos originales pero sin los elementos que no contengan esa clave en sus diccionarios
-
+    Funcion que filtra una el nombre de la clave de cada diccionario en la lista de diccionarios
     """
     lista_nueva = [ ]
     for diccionario in lista_de_diccionarios:
