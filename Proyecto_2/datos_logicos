@@ -1,0 +1,15 @@
+
+{"user_new":{"cant_opciones_cartas":12,"max_cartas_elegir":8, "max_letras_name":20},
+"cartas":
+{"01": {"nombre": "diplodocus", "atk": 40, "hp": 500, "vel_atk": 4,"ruta_foto":"Imagenes/foto_01.png","ruta_fondo":"Imagenes/carta.png"}, 
+"02": {"nombre": "velociraptor", "atk": 50, "hp": 700, "vel_atk": 2,"ruta_foto":"Imagenes/foto_02.png","ruta_fondo":"Imagenes/carta.png"}, 
+"03": {"nombre": "styracosaurus", "atk": 200, "hp": 1000, "vel_atk": 2.3,"ruta_foto":"Imagenes/foto_03.png","ruta_fondo":"Imagenes/carta.png"}, 
+"04": {"nombre": "triceratops", "atk": 30, "hp": 500, "vel_atk": 2, "ruta_foto":"Imagenes/foto_04.png","ruta_fondo":"Imagenes/carta.png"}, 
+"05": {"nombre": "torosaurus", "atk": 60, "hp": 600, "vel_atk": 3.5, "ruta_foto":"Imagenes/foto_05.png","ruta_fondo":"Imagenes/carta.png"}, 
+"06": {"nombre": "gallimimus", "atk": 60, "hp": 600, "vel_atk": 3.5, "ruta_foto":"Imagenes/foto_06.png","ruta_fondo":"Imagenes/carta.png"}, 
+"07": {"nombre": "stegosaurus", "atk": 300, "hp": 1000, "vel_atk": 4, "ruta_foto":"Imagenes/foto_07.png","ruta_fondo":"Imagenes/carta.png"}, 
+"08": {"nombre": "ankilosaurus", "atk": 200, "hp": 1200, "vel_atk": 4.2, "ruta_foto":"Imagenes/foto_08.png","ruta_fondo":"Imagenes/carta.png"},
+"09": {"nombre": "parasaurolophus", "atk": 120, "hp": 800, "vel_atk": 2.3, "ruta_foto":"Imagenes/foto_09.png","ruta_fondo":"Imagenes/carta.png"},
+"10": {"nombre": "carnotaurus", "atk": 230, "hp": 1200, "vel_atk": 3, "ruta_foto":"Imagenes/foto_10.png","ruta_fondo":"Imagenes/carta.png"}, 
+"11": {"nombre": "iguanodon", "atk": 300, "hp": 1300, "vel_atk": 3, "ruta_foto":"Imagenes/foto_11.png","ruta_fondo":"Imagenes/carta.png"}, 
+"12": {"nombre": "pachycephalosaurus", "atk": 600, "hp": 800, "vel_atk": 1.4, "ruta_foto":"Imagenes/foto_12.png","ruta_fondo":"Imagenes/carta.png"}}}

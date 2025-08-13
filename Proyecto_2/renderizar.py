@@ -11,15 +11,24 @@ def renderizar_valor(texto:str)->pygame.Surface:
     return imagen_texto
 
 def get_estilos()->dict:
-    return {"cartas":{"fuente": pygame.font.SysFont("Arial",70),"color":(0,0,0)}}
 
-def get_img_txt_dict(dict_anidados:dict, estilo:dict, lista_keys:list)->dict:
+    return {"cartas":{"fuente": "Verdana", "tamano":17,"color":COLOR_NEGRO},
+            "menu": {"fuente": pygame.font.SysFont("Verdana", 30), "color": COLOR_NEGRO},
+            "nombre":{"fuente": "Verdana","tamano": 35,"color": COLOR_NEGRO}}
+
+def renderizar_una_carta(datos_logicos:dict, estilo:dict)->dict:
     imagenes = {}
-    for elemento_d in dict_anidados:
-        img_values = {}
-        for key in lista_keys:
-            txt = key + " : " + str(dict_anidados[elemento_d][key])
-            img_values[key] = estilo["fuente"].render(txt, estilo["color"],False)
-        imagenes[elemento_d] = img_values
+    print(datos_logicos)
+    fuente_largo = pygame.font.SysFont(estilo["fuente"], estilo["tamano"]-5)
+    fuente = pygame.font.SysFont(estilo["fuente"],estilo["tamano"]) 
+    imagenes["txt_nombre"] = fuente.render("Nombre: "+ datos_logicos["nombre"],estilo["color"],False)
+    imagenes["txt_atk"] = fuente.render("Daño: " + str(datos_logicos["atk"]),estilo["color"],False)
+    imagenes["txt_hp"] = fuente.render("Vida: "+ str(datos_logicos["hp"]),estilo["color"],False)
+    imagenes["txt_vel_atk"] = fuente_largo.render("Velocidad ATK: "+ str(datos_logicos["vel_atk"]),estilo["color"],False)
     return imagenes
 
+def renderizar_cartas(datos_logicos:dict, estilo:dict)->dict:
+    datos_visuales = {}
+    for id in datos_logicos:
+        datos_visuales[id] = renderizar_una_carta(datos_logicos[id],estilo)
+    return 
